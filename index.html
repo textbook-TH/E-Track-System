@@ -1289,8 +1289,17 @@
             } catch (err) {
                 console.error('Auth error:', err);
                 if (errorMsg) {
-                    errorMsg.innerText = err.message || 'เกิดข้อผิดพลาดในการทำรายการ';
+                    let message = err.message || 'เกิดข้อผิดพลาดในการทำรายการ';
+                    
+                    if (message.includes('User already registered')) {
+                        message = 'อีเมลนี้ถูกลงทะเบียนใช้งานในระบบแล้ว';
+                    } else if (message.includes('Invalid login credentials')) {
+                        message = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
+                    }
+
+                    errorMsg.innerText = message;
                     errorMsg.classList.remove('hidden');
+                }
                 }
             } finally {
                 if (submitBtn) {
