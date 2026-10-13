@@ -839,10 +839,10 @@
             initSupabase();
             // ⚡ เพิ่มบล็อกนี้แทรกเข้ามาตรงนี้
     const hash = window.location.hash;
-    if (hash && (hash.includes('type=recovery') || hash.includes('access_token'))) {
-        switchAuthMode('reset');
-        openModal('loginModal');
-    }
+if (hash && (hash.includes('type=recovery') || hash.includes('access_token'))) {
+    switchAuthMode('reset');
+    openModal('loginModal');
+}
 
 // แล้วค่อยตามด้วย await ดึงข้อมูล
     await Promise.all([
