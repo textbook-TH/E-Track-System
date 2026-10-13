@@ -845,15 +845,28 @@
         openModal('loginModal');
     }
 
-    // แล้วค่อยตามด้วย await ดึงข้อมูล
-    await fetchAdminList();
-    await fetchEvaluations();
+// แล้วค่อยตามด้วย await ดึงข้อมูล
+    await Promise.all([
+        fetchAdminList(),
+        fetchEvaluations()
+    ]);
 
     if (supabaseClient) {
-            await fetchAdminList();
-            await fetchEvaluations();
-
-            if (supabaseClient) {
+        try {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session?.user) {
+                const isUserAdmin = checkIsAdmin(session.user.email, session.user.id);
+                currentUser = {
+                    email: session.user.email,
+                    role: isUserAdmin ? 'staff' : (session.user.user_metadata?.role || 'teacher'),
+                    id: session.user.id
+                };
+                updateUI();
+            }
+        } catch (e) {
+            console.warn("Auth Session Error:", e);
+        }
+        
                 try {
                     const { data: { session } } = await supabaseClient.auth.getSession();
                     if (session?.user) {
