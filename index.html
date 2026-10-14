@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EvalTrack - ระบบติดตามสถานะผลการประเมิน</title>
@@ -1154,14 +1154,6 @@ if (hash && (hash.includes('type=recovery') || hash.includes('access_token'))) {
                 if (subtitle) subtitle.innerText = 'กรุณากรอกอีเมลสถาบัน @kmitl.ac.th เพื่อเข้าสู่ระบบ';
                 if (icon) icon.innerHTML = '<i class="fa-solid fa-user-shield text-2xl"></i>';
                 if (roleContainer) roleContainer.classList.remove('hidden');
-
-                // ⚡ หน้าเข้าสู่ระบบ: เปิดให้กดเลือกล็อกอินสิทธิ์เจ้าหน้าที่ได้ตามปกติ
-                const btnStaff = document.getElementById('roleBtnStaff');
-                if (btnStaff) {
-                    btnStaff.disabled = false;
-                    btnStaff.className = "py-3 px-4 rounded-xl border-2 font-medium text-xs flex items-center justify-center space-x-2 transition-all border-slate-200 text-slate-500 hover:border-slate-300";
-                }
-
                 if (emailContainer) emailContainer.classList.remove('hidden');
                 if (emailInput) emailInput.required = true;
                 if (pwdContainer) pwdContainer.classList.remove('hidden');
@@ -1174,15 +1166,6 @@ if (hash && (hash.includes('type=recovery') || hash.includes('access_token'))) {
                 if (subtitle) subtitle.innerText = 'ลงทะเบียนเข้าใช้งานด้วยอีเมลสถาบัน @kmitl.ac.th';
                 if (icon) icon.innerHTML = '<i class="fa-solid fa-user-plus text-2xl"></i>';
                 if (roleContainer) roleContainer.classList.remove('hidden');
-
-                // ⚡ หน้าสมัครสมาชิก: ล็อกปุ่มเจ้าหน้าที่เป็นสีเทา กดไม่ได้ (Disabled) และเลือกสิทธิ์อาจารย์ให้อัตโนมัติ
-                selectLoginRole('teacher');
-                const btnStaff = document.getElementById('roleBtnStaff');
-                if (btnStaff) {
-                    btnStaff.disabled = true;
-                    btnStaff.className = "py-3 px-4 rounded-xl border-2 font-medium text-xs flex items-center justify-center space-x-2 border-slate-200 text-slate-300 bg-slate-100 cursor-not-allowed opacity-60 pointer-events-none";
-                }
-
                 if (emailContainer) emailContainer.classList.remove('hidden');
                 if (emailInput) emailInput.required = true;
                 if (pwdContainer) pwdContainer.classList.remove('hidden');
@@ -1190,7 +1173,6 @@ if (hash && (hash.includes('type=recovery') || hash.includes('access_token'))) {
                 if (submitText) submitText.innerText = 'ยืนยันการสมัครสมาชิก';
                 if (subActions) subActions.classList.add('hidden');
                 if (backContainer) backContainer.classList.remove('hidden');
-            }
             } else if (mode === 'forgot') {
                 if (title) title.innerText = 'ลืมรหัสผ่าน';
                 if (subtitle) subtitle.innerText = 'กรอกอีเมลสถาบันเพื่อรับลิงก์สำหรับรีเซ็ตรหัสผ่าน';
